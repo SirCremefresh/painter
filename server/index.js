@@ -75,7 +75,6 @@ wsServer.on('request', function (request) {
 					for (let i = 0; i < elements.length; i++) {
 						if (elements[i].uuid === data.element.uuid) {
 							elements[i] = data.element;
-							elements.push(data.element);
 							sendToOthers(connection, {
 								type: 'CHANGE',
 								element: data.element

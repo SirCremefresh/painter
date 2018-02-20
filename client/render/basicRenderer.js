@@ -1,5 +1,5 @@
 'use strict';
-import {ctx} from '../canvas/canvas.js';
+import {ctx, beginPath, moveTo, lineTo, setFillStyle, setGlobalAlpha, fill, setLineCap, setLineJoin, setLineWidth, setStrokeStyle, stroke} from '../canvas/canvas.js';
 
 export function basicRenderer(element) {
 	if (element.lines.length === 0) {
@@ -8,30 +8,31 @@ export function basicRenderer(element) {
 
 	// draw background
 	if (element.fillColor !== null) {
-		ctx.beginPath();
-		ctx.moveTo(element.lines[0].pointA.x + element.basePoint.x, element.lines[0].pointA.y + element.basePoint.y);
+		beginPath();
+		moveTo(element.lines[0].pointA.x + element.basePoint.x, element.lines[0].pointA.y + element.basePoint.y);
 		for (const line of element.lines) {
-			ctx.lineTo(line.pointB.x + element.basePoint.x, line.pointB.y + element.basePoint.y);
+			lineTo(line.pointB.x + element.basePoint.x, line.pointB.y + element.basePoint.y);
 		}
 
-		ctx.fillStyle = element.fillColor;
-		ctx.globalAlpha = element.fillColorAlpha;
-		ctx.fill();
+		setFillStyle(element.fillColor);
+		setGlobalAlpha(element.fillColorAlpha);
+		fill();
 	}
 
 	// draw line
 	if (element.color !== null) {
-		ctx.beginPath();
-		ctx.moveTo(element.lines[0].pointA.x + element.basePoint.x, element.lines[0].pointA.y + element.basePoint.y);
+		beginPath();
+		moveTo(element.lines[0].pointA.x + element.basePoint.x, element.lines[0].pointA.y + element.basePoint.y);
 		for (const line of element.lines) {
-			ctx.lineTo(line.pointB.x + element.basePoint.x, line.pointB.y + element.basePoint.y);
+			lineTo(line.pointB.x + element.basePoint.x, line.pointB.y + element.basePoint.y);
 		}
 
-		ctx.lineJoin = ctx.lineCap = 'round';
-		ctx.strokeStyle = element.color;
-		ctx.lineWidth = element.width;
-		ctx.globalAlpha = element.colorAlpha;
-		ctx.stroke();
+		setLineCap('round');
+		setLineJoin('round');
+		setStrokeStyle(element.color);
+		setLineWidth(element.width);
+		setGlobalAlpha(element.colorAlpha);
+		stroke();
 	}
 
 	// draw border

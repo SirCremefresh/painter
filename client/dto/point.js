@@ -1,11 +1,13 @@
 'use strict';
 
 import Utilities from '../utilities.js'
+import {addCanvasOffsetToPoint} from '../canvas/canvas.js';
 
 export class Point {
 	constructor(x, y) {
 		this.x = x;
 		this.y = y;
+		addCanvasOffsetToPoint(this)
 	}
 
 	static isPointBetweenSquare(corner1, corner2, point, padding = 0) {
