@@ -1,0 +1,12 @@
+html, body, head {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: fixed;
+}
+
+#toolBox {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
