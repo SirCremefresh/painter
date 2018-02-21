@@ -1,18 +1,8 @@
 'use strict';
 
-const restify = require('restify');
-const url = require('url');
 const uuidV4 = require('uuid/v4');
 const WebSocketServer = require('websocket').server;
-const http = require('http');
-var express = require('express');
-//var server = express.createServer();
-// express.createServer()  is deprecated.
-var app = express();
-
-var server = app.listen(8080, function () {
-	console.log('Example app listening on port 8080!');
-});
+const express = require('express');
 
 const SERVER_PORT = 8080;
 const WEBSOCKET_SERVER_PROTOCOL = 'fancy-painter-protocol';
@@ -20,12 +10,14 @@ const WEBSOCKET_SERVER_PROTOCOL = 'fancy-painter-protocol';
 const users = [];
 const elements = [];
 
-// const server = http.createServer(function (request, response) {
-// });
-//
-// server.listen(SERVER_PORT, function () {
-// 	console.log((new Date()) + ' Server is listening on port 8080');
-// });
+const app = express();
+
+app.use(express.static('static'));
+
+const server = app.listen(SERVER_PORT, function () {
+	console.log('Server is now Listening on Port: ' + SERVER_PORT);
+});
+
 
 const wsServer = new WebSocketServer({
 	httpServer: server,
@@ -91,7 +83,6 @@ wsServer.on('request', function (request) {
 					}
 
 			}
-			// connection.sendUTF(message.utf8Data + 'dida');
 		}
 	});
 
