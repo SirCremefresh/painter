@@ -44,9 +44,10 @@ canvas.onmousemove = (e) => {
 	activeTool.handleMove(e);
 };
 
-canvas.onmousewheel = (e) => {
+
+canvas.addEventListener('mousewheel', (e) => {
 	activeTool.handleMouseWheel(e);
-};
+}, {passive: true});
 
 canvas.onmouseout = () => {
 	activeTool.handleMouseOut();

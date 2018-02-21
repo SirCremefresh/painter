@@ -38,6 +38,5 @@ export class MoveCanvasTool extends Tool {
 		const deltaPoint = Point.getDeltaPoint(newMousePosition, this.lastMousePosition);
 		this.lastMousePosition = newMousePosition;
 		moveCanvasWithDelta(deltaPoint);
-		console.log(deltaPoint.x);
 	}
 }
