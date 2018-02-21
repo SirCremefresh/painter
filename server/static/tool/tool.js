@@ -16,6 +16,9 @@ export class Tool {
 	handleMouseOut(e) {
 	}
 
+	handleMouseWheel(e) {
+	}
+
 	close() {
 	}
 }

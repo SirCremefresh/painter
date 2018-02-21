@@ -2,6 +2,7 @@
 import {Tool} from './tool.js';
 import {PaintTool} from './paintTool.js';
 import {canvas} from '../canvas/canvas.js'
+import {MoveCanvasTool} from './moveCanvasTool.js';
 // import {EditTool} from './editTool.js';
 
 
@@ -14,12 +15,18 @@ export function selectTool(toolName) {
 			activeTool.close();
 			activeTool = new PaintTool();
 			break;
+		case 'moveCanvasTool':
+			activeTool.close();
+			activeTool = new MoveCanvasTool();
+			break;
 		// case 'editTool':
 		// 	activeTool.close();
 		// 	activeTool = new EditTool();
 		// 	break;
 	}
 }
+
+window.selectTool = selectTool;
 
 canvas.onclick = (e) => {
 	activeTool.handleClick(e);
@@ -35,6 +42,10 @@ canvas.onmouseup = (e) => {
 
 canvas.onmousemove = (e) => {
 	activeTool.handleMove(e);
+};
+
+canvas.onmousewheel = (e) => {
+	activeTool.handleMouseWheel(e);
 };
 
 canvas.onmouseout = () => {

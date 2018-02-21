@@ -42,7 +42,7 @@ export class PaintTool extends Tool {
 		} else {
 			let pointA;
 			if (this.currentElement.lines.length === 0) {
-				pointA = new Point(0, 0);
+				pointA = new Point(0, 0, false);
 			} else {
 				const lastPoint = this.currentElement.lines[this.currentElement.lines.length - 1].pointB;
 				pointA = new Point(lastPoint.x, lastPoint.y);

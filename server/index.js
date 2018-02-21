@@ -5,7 +5,14 @@ const url = require('url');
 const uuidV4 = require('uuid/v4');
 const WebSocketServer = require('websocket').server;
 const http = require('http');
+var express = require('express');
+//var server = express.createServer();
+// express.createServer()  is deprecated.
+var app = express();
 
+var server = app.listen(8080, function () {
+	console.log('Example app listening on port 8080!');
+});
 
 const SERVER_PORT = 8080;
 const WEBSOCKET_SERVER_PROTOCOL = 'fancy-painter-protocol';
@@ -13,12 +20,12 @@ const WEBSOCKET_SERVER_PROTOCOL = 'fancy-painter-protocol';
 const users = [];
 const elements = [];
 
-const server = http.createServer(function (request, response) {
-});
-
-server.listen(SERVER_PORT, function () {
-	console.log((new Date()) + ' Server is listening on port 8080');
-});
+// const server = http.createServer(function (request, response) {
+// });
+//
+// server.listen(SERVER_PORT, function () {
+// 	console.log((new Date()) + ' Server is listening on port 8080');
+// });
 
 const wsServer = new WebSocketServer({
 	httpServer: server,
@@ -103,8 +110,6 @@ function sendToOthers(conn, obj) {
 	for (const user of users) {
 		if (user.connection !== conn) {
 			send(user.connection, obj);
-		} else {
-			console.log('same');
 		}
 	}
 }

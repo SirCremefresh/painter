@@ -4,10 +4,12 @@ import Utilities from '../utilities.js'
 import {addCanvasOffsetToPoint} from '../canvas/canvas.js';
 
 export class Point {
-	constructor(x, y) {
+	constructor(x, y, makeCanvasRelative = true) {
 		this.x = x;
 		this.y = y;
-		addCanvasOffsetToPoint(this)
+		if(makeCanvasRelative) {
+			addCanvasOffsetToPoint(this)
+		}
 	}
 
 	static isPointBetweenSquare(corner1, corner2, point, padding = 0) {
@@ -56,14 +58,16 @@ export class Point {
 	static getDeltaPoint(point1, point2) {
 		return new Point(
 			point1.x - point2.x,
-			point1.y - point2.y
+			point1.y - point2.y,
+			false
 		);
 	}
 
 	static movePointWhitDeltaPoint(point, deltaPoint) {
 		return new Point(
 			point.x + deltaPoint.x,
-			point.y + deltaPoint.y
+			point.y + deltaPoint.y,
+			false
 		);
 	}
 }

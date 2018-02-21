@@ -26,7 +26,7 @@ export class Element {
 	}
 
 	static getRelativePointToElement(point, element) {
-		return new Point(point.x - element.basePoint.x, point.y - element.basePoint.y)
+		return new Point(point.x - element.basePoint.x, point.y - element.basePoint.y, false)
 	}
 
 	static getElementWithPoint(point, padding) {

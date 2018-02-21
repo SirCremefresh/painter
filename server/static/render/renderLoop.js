@@ -2,8 +2,11 @@
 import {clearCanvas} from '../canvas/canvas.js';
 import {basicRenderer} from './basicRenderer.js';
 
+let lastMs = 0;
+function drawLoop(ms) {
 
-function drawLoop() {
+	console.log(Math.round((1000 - (ms - lastMs)) * (60 / 1000)));
+	lastMs = ms;
 	clearCanvas();
 	for (const element of elements) {
 		renderElement(element);
