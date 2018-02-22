@@ -17,26 +17,15 @@ export function clearCanvas() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-// export function drawLine(line, base, width) {
-// 	ctx.beginPath();
-// 	ctx.moveTo(line.pointA.x + base.x + canvasOffsetX, line.pointA.y + base.y + canvasOffsetY);
-// 	ctx.lineTo(line.pointB.x + base.x + canvasOffsetX, line.pointB.y + base.y + canvasOffsetY);
-// 	ctx.strokeStyle = line.color;
-// 	ctx.lineWidth = width;
-// 	ctx.stroke();
-// }
-
 export function beginPath() {
 	ctx.beginPath();
 }
 
 export function moveTo(x, y) {
-	// ctx.moveTo((x + canvasOffsetX) * canvasScale, (y + canvasOffsetY) * canvasScale);
 	ctx.moveTo(x * canvasScale + canvasOffsetX, y * canvasScale + canvasOffsetY);
 }
 
 export function lineTo(x, y) {
-	// ctx.lineTo((x + canvasOffsetX) * canvasScale, (y + canvasOffsetY) * canvasScale);
 	ctx.lineTo(x * canvasScale + canvasOffsetX, y * canvasScale + canvasOffsetY);
 }
 
@@ -81,25 +70,26 @@ export function canvasScaleDelta(delta) {
 	canvasScale += delta;
 }
 
-// WTF why /2 TODO find out why
+export function scaleTo(pPoint, deltaScale) {
+	const offsetPointBefore = addCanvasOffsetToPoint({x: pPoint.x, y: pPoint.y});
+	canvasScale += deltaScale;
+	const offsetPointAfter = addCanvasOffsetToPoint({x: pPoint.x, y: pPoint.y});
+
+	canvasOffsetX += offsetPointAfter.x - offsetPointBefore.x;
+	canvasOffsetY += offsetPointAfter.y - offsetPointBefore.y;
+
+
+}
+
 export function addCanvasOffsetToPoint(point) {
 	point.x -= canvasOffsetX;
 	point.y -= canvasOffsetY;
 	point.x /= canvasScale;
 	point.y /= canvasScale;
+	return point;
 }
 
-window.onresize = function (event) {
+window.onresize = (e) => {
 	setCanvasSize();
 };
-
-canvasScale = 0.5;
-canvasOffsetX = 200;
-// setInterval(() => {canvasScale += 0.005}, 10);
-
-
-//260
-//1270
-//1530
-//1.2
 

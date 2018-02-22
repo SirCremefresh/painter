@@ -1,11 +1,8 @@
 'use strict';
 
 import {Tool} from './tool.js';
-import {Element} from '../dto/element.js'
-import {Line} from '../dto/line.js';
 import {Point} from '../dto/point.js';
-import Utilities from '../utilities.js';
-import {moveCanvasWithDelta, canvasScaleDelta} from '../canvas/canvas.js';
+import {moveCanvasWithDelta, scaleTo} from '../canvas/canvas.js';
 
 
 export class MoveCanvasTool extends Tool {
@@ -27,7 +24,7 @@ export class MoveCanvasTool extends Tool {
 	}
 
 	handleMouseWheel(e) {
-		canvasScaleDelta(e.deltaY / 1000)
+		scaleTo({x:e.x,y:e.y}, e.deltaY / 1000)
 	}
 
 	handleMove(e) {
