@@ -39,12 +39,12 @@ export class Element {
 	}
 
 	static hasElementPoint(element, point, padding = 0) {
-		point = Utilities.getRelativePointToElement(point, element);
+		point = Element.getRelativePointToElement(point, element);
 		for (const line of element.lines) {
 			const pointA = line.pointA;
 			const pointB = line.pointB;
 
-			if (Utilities.isPointBetweenSquare(pointA, pointB, point, element.width + padding + 5)) {
+			if (Point.isPointBetweenSquare(pointA, pointB, point, element.width + padding + 5)) {
 
 
 				const gradient = (pointB.y - pointA.y) / (pointB.x - pointA.x);
@@ -71,6 +71,10 @@ export class Element {
 		return null;
 	}
 
+	static moveElement(element, deltaPoint) {
+		element.basePoint = Point.movePointWhitDeltaPoint(element.basePoint, deltaPoint);
+	}
+
 	static getCorners(element, padding = 0) {
 		let maxX = -1, maxY = -1, minX = Infinity, minY = Infinity;
 
@@ -87,8 +91,7 @@ export class Element {
 			minX = Utilities.getMin(line.pointB.x, minX);
 			minY = Utilities.getMin(line.pointB.y, minY);
 		}
-
-		return Utilities.getFourCorners(new Point(minX, minY), new Point(maxX, maxY), padding)
+		return Point.getFourCorners(new Point(minX, minY), new Point(maxX, maxY), padding)
 
 	}
 

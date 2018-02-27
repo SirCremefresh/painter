@@ -13,7 +13,7 @@ export class Point {
 	}
 
 	static isPointBetweenSquare(corner1, corner2, point, padding = 0) {
-		const {bottomLeft, topRight} = Utilities.getFourCorners(corner1, corner2);
+		const {bottomLeft, topRight} = Point.getFourCorners(corner1, corner2);
 		return (
 			bottomLeft.y + padding >= point.y &&
 			bottomLeft.x - padding <= point.x &&
